@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Car Service Quote</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f8f7;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+    header {
+      background-color: #008080;
+      color: white;
+      text-align: center;
+      padding: 1.5rem 0;
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 2rem;
+      width: 90%;
+      max-width: 480px;
+    }
+    h2 {
+      color: #008080;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    label {
+      font-weight: 500;
+      margin-top: 1rem;
+      display: block;
+    }
+    input, select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-top: 0.5rem;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #ffb703;
+      color: #000;
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: 10px;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      width: 100%;
+      font-size: 1rem;
+      transition: background-color 0.2s ease-in-out;
+    }
+    button:hover {
+      background-color: #ffd166;
+    }
+    .whatsapp-link {
+      display: inline-block;
+      margin-top: 1rem;
+      text-align: center;
+      background-color: #25D366;
+      color: white;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      width: 100%;
+    }
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      color: #555;
+      font-size: 0.9rem;
+      padding-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    My Car Service Quote
+  </header>
+
+  <main>
+    <div class="container">
+      <h2>Get Your Instant Quote</h2>
+      <form id="quoteForm">
+        <label for="make">Car Make</label>
+        <input type="text" id="make" placeholder="e.g. Toyota" required />
+
+        <label for="model">Model</label>
+        <input type="text" id="model" placeholder="e.g. Corolla" required />
+
+        <label for="year">Year</label>
+        <input type="number" id="year" placeholder="e.g. 2018" required />
+
+        <label for="serviceType">Service Type</label>
+        <select id="serviceType">
+          <option value="minor">Minor Service</option>
+          <option value="major">Major Service</option>
+          <option value="brakes">Brake Pads Replacement</option>
+          <option value="diagnostic">Diagnostic Check</option>
+        </select>
+
+        <button type="button" onclick="generateQuote()">Get Quote</button>
+      </form>
+
+      <div id="quoteResult" style="display:none; margin-top:1.5rem; text-align:center;">
+        <h3>Estimated Quote:</h3>
+        <p id="priceDisplay" style="font-size:1.3rem; font-weight:600; color:#008080;"></p>
+        <a id="whatsappLink" class="whatsapp-link" href="" target="_blank">Send via WhatsApp</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 My Car Service Quote. All Rights Reserved.
+  </footer>
+
+  <script>
+    function generateQuote() {
+      const make = document.getElementById('make').value;
+      const model = document.getElementById('model').value;
+      const year = document.getElementById('year').value;
+      const type = document.getElementById('serviceType').value;
+
+      if(!make || !model || !year) return alert('Please fill in all details.');
+
+      let price = 0;
+      switch(type){
+        case 'minor': price = 950; break;
+        case 'major': price = 1850; break;
+        case 'brakes': price = 750; break;
+        case 'diagnostic': price = 400; break;
+      }
+
+      document.getElementById('priceDisplay').innerText = 'R' + price + ' (estimated)';
+      document.getElementById('quoteResult').style.display = 'block';
+
+      const message = `Hi, I'm looking for a ${type} service quote for my ${year} ${make} ${model}.`; 
+      const whatsappLink = `https://wa.me/27616477681?text=${encodeURIComponent(message)}`;
+      document.getElementById('whatsappLink').href = whatsappLink;
+    }
+  </script>
+</body>
+</html>
