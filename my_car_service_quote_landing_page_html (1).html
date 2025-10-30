@@ -11,7 +11,6 @@
       margin: 0;
       padding: 0;
       color: #222;
-      scroll-behavior: smooth;
     }
     header {
       background-color: #008080;
@@ -36,12 +35,11 @@
       padding: 2rem;
       width: 90%;
       max-width: 480px;
-      margin-bottom: 3rem;
     }
-    h2, h3 {
+    h2 {
       color: #008080;
-      text-align: center;
       margin-bottom: 1rem;
+      text-align: center;
     }
     label {
       font-weight: 500;
@@ -84,66 +82,19 @@
       font-weight: 600;
       width: 100%;
     }
-    section {
-      width: 90%;
-      max-width: 700px;
-      margin-bottom: 3rem;
-    }
-    p {
-      line-height: 1.6;
-      color: #333;
-    }
-    ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    ul li {
-      background: #e6f4f3;
-      margin: 0.5rem 0;
-      padding: 0.8rem 1rem;
-      border-radius: 8px;
-      font-weight: 500;
-    }
     footer {
+      margin-top: 2rem;
       text-align: center;
       color: #555;
       font-size: 0.9rem;
-      padding: 1.5rem 0;
-    }
-    /* Floating WhatsApp Button */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #25D366;
-      color: white;
-      border-radius: 50%;
-      padding: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-      font-size: 1.8rem;
-      z-index: 999;
-      text-decoration: none;
-    }
-    /* Back to Top Button */
-    #backToTop {
-      display: none;
-      position: fixed;
-      bottom: 90px;
-      right: 20px;
-      background-color: #008080;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      padding: 10px 15px;
-      cursor: pointer;
-      font-size: 1.2rem;
-      z-index: 999;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      padding-bottom: 1rem;
     }
   </style>
 </head>
 <body>
-  <header>My Car Service Quote</header>
+  <header>
+    My Car Service Quote
+  </header>
 
   <main>
     <div class="container">
@@ -151,10 +102,13 @@
       <form id="quoteForm">
         <label for="make">Car Make</label>
         <input type="text" id="make" placeholder="e.g. Toyota" required />
+
         <label for="model">Model</label>
         <input type="text" id="model" placeholder="e.g. Corolla" required />
+
         <label for="year">Year</label>
         <input type="number" id="year" placeholder="e.g. 2018" required />
+
         <label for="serviceType">Service Type</label>
         <select id="serviceType">
           <option value="minor">Minor Service</option>
@@ -162,52 +116,21 @@
           <option value="brakes">Brake Pads Replacement</option>
           <option value="diagnostic">Diagnostic Check</option>
         </select>
+
         <button type="button" onclick="generateQuote()">Get Quote</button>
       </form>
+
       <div id="quoteResult" style="display:none; margin-top:1.5rem; text-align:center;">
         <h3>Estimated Quote:</h3>
         <p id="priceDisplay" style="font-size:1.3rem; font-weight:600; color:#008080;"></p>
         <a id="whatsappLink" class="whatsapp-link" href="" target="_blank">Send via WhatsApp</a>
       </div>
     </div>
-
-    <section id="how-it-works">
-      <h2>How It Works</h2>
-      <ul>
-        <li>Step 1️⃣ Enter your vehicle details</li>
-        <li>Step 2️⃣ Instantly get an estimated quote</li>
-        <li>Step 3️⃣ Receive a confirmed price from RMI-approved workshops</li>
-      </ul>
-    </section>
-
-    <section id="about">
-      <h2>About Us</h2>
-      <p>
-        At <strong>My Car Service Quote</strong>, we make it easier for South Africans to service their cars 
-        without the hassle of calling multiple workshops. We instantly find the most affordable, 
-        reliable quotes from trusted RMI-approved workshops and mobile mechanics — saving you time and money.
-      </p>
-    </section>
-
-    <section id="callback">
-      <h2>Request a Call Back</h2>
-      <form id="callbackForm">
-        <label for="cbName">Your Name</label>
-        <input type="text" id="cbName" placeholder="Full Name" required />
-        <label for="cbCar">Car Details</label>
-        <input type="text" id="cbCar" placeholder="e.g. 2018 VW Polo" required />
-        <label for="cbPhone">Your Contact Number</label>
-        <input type="tel" id="cbPhone" placeholder="e.g. 0812345678" required />
-        <button type="button" onclick="sendWhatsApp()">Send via WhatsApp</button>
-      </form>
-    </section>
   </main>
 
-  <footer>© 2025 My Car Service Quote. All Rights Reserved.</footer>
-
-  <!-- Floating WhatsApp and Back to Top -->
-  <a href="https://wa.me/27616477681" class="whatsapp-float" target="_blank">💬</a>
-  <button id="backToTop" onclick="scrollToTop()">↑</button>
+  <footer>
+    © 2025 My Car Service Quote. All Rights Reserved.
+  </footer>
 
   <script>
     function generateQuote() {
@@ -215,7 +138,9 @@
       const model = document.getElementById('model').value;
       const year = document.getElementById('year').value;
       const type = document.getElementById('serviceType').value;
+
       if(!make || !model || !year) return alert('Please fill in all details.');
+
       let price = 0;
       switch(type){
         case 'minor': price = 950; break;
@@ -223,33 +148,13 @@
         case 'brakes': price = 750; break;
         case 'diagnostic': price = 400; break;
       }
+
       document.getElementById('priceDisplay').innerText = 'R' + price + ' (estimated)';
       document.getElementById('quoteResult').style.display = 'block';
-      const message = `Hi, I'm looking for a ${type} service quote for my ${year} ${make} ${model}.`;
+
+      const message = `Hi, I'm looking for a ${type} service quote for my ${year} ${make} ${model}.`; 
       const whatsappLink = `https://wa.me/27616477681?text=${encodeURIComponent(message)}`;
       document.getElementById('whatsappLink').href = whatsappLink;
-    }
-
-    function sendWhatsApp() {
-      const name = document.getElementById('cbName').value;
-      const car = document.getElementById('cbCar').value;
-      const phone = document.getElementById('cbPhone').value;
-      if(!name || !car || !phone) return alert('Please fill in all details.');
-      const message = `Hi, my name is ${name}. I’d like a call back about servicing my ${car}. You can reach me on ${phone}.`;
-      const link = `https://wa.me/27616477681?text=${encodeURIComponent(message)}`;
-      window.open(link, '_blank');
-    }
-
-    const backToTop = document.getElementById("backToTop");
-    window.onscroll = () => {
-      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-        backToTop.style.display = "block";
-      } else {
-        backToTop.style.display = "none";
-      }
-    };
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
 </body>
